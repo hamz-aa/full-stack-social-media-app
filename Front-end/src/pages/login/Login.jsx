@@ -1,6 +1,11 @@
 import "./login.css";
 
 export default function Login() {
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("submit");
+  };
+
   return (
     <div className="login">
       <div className="login-wrapper">
@@ -11,7 +16,7 @@ export default function Login() {
           </span>
         </div>
         <div className="login-right">
-          <div className="login-box">
+          <form className="login-box" onSubmit={handleClick}>
             <input type="email" placeholder="Email" className="login-input" />
             <input
               type="password"
@@ -23,7 +28,7 @@ export default function Login() {
             <button className="login-register-button">
               Create a new account
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
