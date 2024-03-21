@@ -12,24 +12,24 @@ export default function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
-    currentUser.followings.includes(user?.id)
+    currentUser.followings.includes(user?._id)
   );
 
-  useEffect(() => {
-    setFollowed(currentUser.followings.includes(user?.id));
-  }, [currentUser, user.id]);
+  // useEffect(() => {
+  //   setFollowed(currentUser.followings.includes(user?._id));
+  // }, [currentUser, user?._id]);
 
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get("/users/friends/" + user._id);
+        const friendList = await axios.get("/users/friends/" + user?._id);
         setFriends(friendList.data);
       } catch (error) {
         console.log(error);
       }
     };
     getFriends();
-  }, [user._id]);
+  }, [user]);
 
   const handleClick = async () => {
     try {
@@ -107,6 +107,7 @@ export default function Rightbar({ user }) {
               <Link
                 to={"/profile/" + friend.username}
                 style={{ textDecoration: "none" }}
+                key={friend._id}
               >
                 <div className="rightbar-following">
                   <img
