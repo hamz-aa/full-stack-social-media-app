@@ -101,6 +101,7 @@ router.put("/:id/follow", async (req, res) => {
 // un-follow a user
 router.put("/:id/unfollow", async (req, res) => {
   if (req.body.userId !== req.params.id) {
+    console.log("here now");
     try {
       const user = await User.findById(req.params.id);
       const currentUser = await User.findById(req.body.userId);
