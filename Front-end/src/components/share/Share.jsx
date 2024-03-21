@@ -22,8 +22,7 @@ export default function Share() {
       const fileName = Date.now() + file.name;
       data.append("name", fileName);
       data.append("file", file);
-      newPost.image = fileName;
-      console.log(data, " ==> data");
+      newPost.img = fileName;
       try {
         await axios.post("/upload", data);
       } catch (error) {
@@ -32,8 +31,8 @@ export default function Share() {
     }
 
     try {
-      console.log(newPost, " ==> newPost");
       await axios.post("/posts", newPost);
+      window.location.reload();
     } catch (error) {}
   };
 
