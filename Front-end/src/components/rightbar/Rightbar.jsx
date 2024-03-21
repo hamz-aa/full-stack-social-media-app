@@ -15,9 +15,9 @@ export default function Rightbar({ user }) {
     currentUser.followings.includes(user?._id)
   );
 
-  // useEffect(() => {
-  //   setFollowed(currentUser.followings.includes(user?._id));
-  // }, [currentUser, user?._id]);
+  useEffect(() => {
+    setFollowed(currentUser.followings.includes(user?._id));
+  }, [currentUser, user?._id]);
 
   useEffect(() => {
     const getFriends = async () => {
@@ -35,12 +35,12 @@ export default function Rightbar({ user }) {
     try {
       if (followed) {
         await axios.put(`/users/${user._id}/unfollow`, {
-          userId: currentUser._id,
+          userId: currentUser._id.$oid,
         });
         dispatch({ type: "UNFOLLOW", payload: user._id });
       } else {
         await axios.put(`/users/${user._id}/follow`, {
-          userId: currentUser._id,
+          userId: currentUser._id.$oid,
         });
         dispatch({ type: "FOLLOW", payload: user._id });
       }
